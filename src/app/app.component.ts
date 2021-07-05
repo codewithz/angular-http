@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
     // Send Http request
     console.log(postData);
     let url=this.baseUrl+'posts.json'
-    this.http.post(url,postData)
+    this.http.post<{name:string}>(url,postData)
     .subscribe(
       ((responseData)=>{
         console.log(responseData)
@@ -31,9 +31,9 @@ export class AppComponent implements OnInit {
 
   onFetchPosts() {
      let url=this.baseUrl+"posts.json"
-     this.http.get(url).
+     this.http.get<{[key:string]:Post}>(url).
      pipe(
-       map((responseData:{[key:string]:Post})=>{
+       map((responseData)=>{
          const postArray:Post[]=[];
          for(const key in responseData){
            postArray.push({...responseData[key],id:key})
