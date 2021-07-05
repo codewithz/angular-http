@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Post } from './post.model';
 import {map} from 'rxjs/operators'
@@ -28,7 +28,9 @@ export class PostService {
   getPosts(){
  
     let url=this.baseUrl+"posts.json"
-    return  this.http.get<{[key:string]:Post}>(url).
+    return  this.http.get<{[key:string]:Post}>(url,{
+      headers:new HttpHeaders({"Custom-Header":'Zartab'})
+    }).
      pipe(
        map((responseData)=>{
          const postArray:Post[]=[];
