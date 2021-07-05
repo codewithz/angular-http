@@ -10,12 +10,15 @@ import { Post } from './post.model';
 })
 export class AppComponent implements OnInit {
   loadedPosts = [];
+  
 
   baseUrl:string="https://ng-http-cwz-default-rtdb.firebaseio.com/"
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchPosts();
+  }
 
   onCreatePost(postData: { title: string; content: string }) {
     // Send Http request
@@ -30,7 +33,15 @@ export class AppComponent implements OnInit {
   }
 
   onFetchPosts() {
-     let url=this.baseUrl+"posts.json"
+    this.fetchPosts();
+  }
+
+  onClearPosts() {
+    // Send Http request
+  }
+
+  private fetchPosts(){
+    let url=this.baseUrl+"posts.json"
      this.http.get<{[key:string]:Post}>(url).
      pipe(
        map((responseData)=>{
@@ -48,9 +59,5 @@ export class AppComponent implements OnInit {
          console.log(posts)
        }
      )
-  }
-
-  onClearPosts() {
-    // Send Http request
   }
 }
