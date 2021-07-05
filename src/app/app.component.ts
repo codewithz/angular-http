@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent implements OnInit {
   loadedPosts = [];
 
+  baseUrl:string="https://ng-http-cwz-default-rtdb.firebaseio.com/"
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {}
@@ -16,10 +18,23 @@ export class AppComponent implements OnInit {
   onCreatePost(postData: { title: string; content: string }) {
     // Send Http request
     console.log(postData);
+    let url=this.baseUrl+'posts.json'
+    this.http.post(url,postData)
+    .subscribe(
+      ((responseData)=>{
+        console.log(responseData)
+      }
+    ))
   }
 
   onFetchPosts() {
-    // Send Http request
+     let url=this.baseUrl+"posts.json"
+     this.http.get(url).
+     subscribe(
+       (responseBody)=>{
+         console.log(responseBody)
+       }
+     )
   }
 
   onClearPosts() {
