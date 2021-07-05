@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {map} from 'rxjs/operators'
 
 @Component({
   selector: 'app-root',
@@ -30,9 +31,19 @@ export class AppComponent implements OnInit {
   onFetchPosts() {
      let url=this.baseUrl+"posts.json"
      this.http.get(url).
+     pipe(
+       map((responseData)=>{
+         const postArray=[];
+         for(const key in responseData){
+           postArray.push(responseData[key])
+         }
+         return postArray;
+       })
+     ).
      subscribe(
-       (responseBody)=>{
-         console.log(responseBody)
+       //.....
+       (posts)=>{
+         console.log(posts)
        }
      )
   }
