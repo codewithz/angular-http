@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SpinnerComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent]

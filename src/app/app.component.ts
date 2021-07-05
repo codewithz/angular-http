@@ -10,7 +10,7 @@ import { Post } from './post.model';
 })
 export class AppComponent implements OnInit {
   loadedPosts = [];
-  
+  isFetching:boolean=false;
 
   baseUrl:string="https://ng-http-cwz-default-rtdb.firebaseio.com/"
 
@@ -41,6 +41,7 @@ export class AppComponent implements OnInit {
   }
 
   private fetchPosts(){
+    this.isFetching=true;
     let url=this.baseUrl+"posts.json"
      this.http.get<{[key:string]:Post}>(url).
      pipe(
@@ -55,6 +56,7 @@ export class AppComponent implements OnInit {
      subscribe(
        //.....
        (posts)=>{
+         this.isFetching=false;
          this.loadedPosts=posts;
          console.log(posts)
        }
