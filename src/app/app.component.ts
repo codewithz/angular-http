@@ -44,6 +44,7 @@ export class AppComponent implements OnInit {
      subscribe(
        //.....
        (posts)=>{
+         this.loadedPosts=posts;
          console.log(posts)
        }
      )
