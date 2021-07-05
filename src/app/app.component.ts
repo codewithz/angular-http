@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {map} from 'rxjs/operators'
+import { Post } from './post.model';
 
 @Component({
   selector: 'app-root',
@@ -32,8 +33,8 @@ export class AppComponent implements OnInit {
      let url=this.baseUrl+"posts.json"
      this.http.get(url).
      pipe(
-       map((responseData)=>{
-         const postArray=[];
+       map((responseData:{[key:string]:Post})=>{
+         const postArray:Post[]=[];
          for(const key in responseData){
            postArray.push({...responseData[key],id:key})
          }
