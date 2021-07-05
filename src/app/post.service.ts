@@ -10,6 +10,11 @@ export class PostService {
 
   baseUrl:string="https://ng-http-cwz-default-rtdb.firebaseio.com/"
 
+  headers=new HttpHeaders({'custom-header':'xyz'}).
+              append('header-1','zartab').
+              append('header-2','nakhwa');
+  
+
   constructor(private http:HttpClient) {
 
    }
@@ -29,7 +34,8 @@ export class PostService {
  
     let url=this.baseUrl+"posts.json"
     return  this.http.get<{[key:string]:Post}>(url,{
-      headers:new HttpHeaders({"Custom-Header":'Zartab'})
+      // headers:new HttpHeaders({"Custom-Header":'Zartab'})
+      headers:this.headers
     }).
      pipe(
        map((responseData)=>{
