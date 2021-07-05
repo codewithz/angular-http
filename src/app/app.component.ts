@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {map} from 'rxjs/operators'
 import { Post } from './post.model';
+import { PostService } from './post.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,11 @@ export class AppComponent implements OnInit {
 
   baseUrl:string="https://ng-http-cwz-default-rtdb.firebaseio.com/"
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private postService:PostService
+    ) {
+
+  }
 
   ngOnInit() {
     this.fetchPosts();
@@ -22,14 +27,9 @@ export class AppComponent implements OnInit {
 
   onCreatePost(postData: { title: string; content: string }) {
     // Send Http request
-    console.log(postData);
-    let url=this.baseUrl+'posts.json'
-    this.http.post<{name:string}>(url,postData)
-    .subscribe(
-      ((responseData)=>{
-        console.log(responseData)
-      }
-    ))
+
+    this.postService.createPost(postData)
+    
   }
 
   onFetchPosts() {
