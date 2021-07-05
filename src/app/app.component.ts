@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fetchPosts();
+    this.postService.getPosts()
   }
 
   onCreatePost(postData: { title: string; content: string }) {
@@ -33,33 +33,33 @@ export class AppComponent implements OnInit {
   }
 
   onFetchPosts() {
-    this.fetchPosts();
+   this.postService.getPosts();
   }
 
   onClearPosts() {
     // Send Http request
   }
 
-  private fetchPosts(){
-    this.isFetching=true;
-    let url=this.baseUrl+"posts.json"
-     this.http.get<{[key:string]:Post}>(url).
-     pipe(
-       map((responseData)=>{
-         const postArray:Post[]=[];
-         for(const key in responseData){
-           postArray.push({...responseData[key],id:key})
-         }
-         return postArray;
-       })
-     ).
-     subscribe(
-       //.....
-       (posts)=>{
-         this.isFetching=false;
-         this.loadedPosts=posts;
-         console.log(posts)
-       }
-     )
-  }
+  // private fetchPosts(){
+  //   this.isFetching=true;
+  //   let url=this.baseUrl+"posts.json"
+  //    this.http.get<{[key:string]:Post}>(url).
+  //    pipe(
+  //      map((responseData)=>{
+  //        const postArray:Post[]=[];
+  //        for(const key in responseData){
+  //          postArray.push({...responseData[key],id:key})
+  //        }
+  //        return postArray;
+  //      })
+  //    ).
+  //    subscribe(
+  //      //.....
+  //      (posts)=>{
+  //        this.isFetching=false;
+  //        this.loadedPosts=posts;
+  //        console.log(posts)
+  //      }
+  //    )
+  // }
 }
