@@ -28,7 +28,7 @@ export class PostService {
   getPosts(){
  
     let url=this.baseUrl+"posts.json"
-     this.http.get<{[key:string]:Post}>(url).
+    return  this.http.get<{[key:string]:Post}>(url).
      pipe(
        map((responseData)=>{
          const postArray:Post[]=[];
@@ -37,13 +37,6 @@ export class PostService {
          }
          return postArray;
        })
-     ).
-     subscribe(
-       //.....
-       (posts)=>{
-       
-         console.log(posts)
-       }
-     )
+     );
   }
 }
