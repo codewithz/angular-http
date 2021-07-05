@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
        map((responseData)=>{
          const postArray=[];
          for(const key in responseData){
-           postArray.push(responseData[key])
+           postArray.push({...responseData[key],id:key})
          }
          return postArray;
        })
