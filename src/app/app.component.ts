@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   isFetching:boolean=false;
 
   baseUrl:string="https://ng-http-cwz-default-rtdb.firebaseio.com/"
+  error=null;
 
   constructor(private http: HttpClient,
     private postService:PostService
@@ -50,6 +51,7 @@ export class AppComponent implements OnInit {
        this.loadedPosts=posts;
      },
      (error)=>{
+       this.error=error.message;
        console.log(error.message)
      }
  

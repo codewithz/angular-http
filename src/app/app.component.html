@@ -60,7 +60,11 @@
         <p>{{post.content}}</p>
         </li>
       </ul>
-      <app-spinner *ngIf="isFetching"></app-spinner>
+      <app-spinner *ngIf="isFetching && !error"></app-spinner>
+      <div class="alert alert-danger" *ngIf="error">
+        <h1>An Error has occurred!!</h1>
+        <p>{{error}}</p>
+      </div>
     </div>
   </div>
 </div>
