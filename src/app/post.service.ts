@@ -39,4 +39,9 @@ export class PostService {
        })
      );
   }
+
+  deletePosts(){
+    let url=this.baseUrl+"posts.json"
+    return this.http.delete(url)
+  }
 }

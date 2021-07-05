@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {spinner} from 'spinner.gif';
 
 @Component({
   selector: 'app-spinner',

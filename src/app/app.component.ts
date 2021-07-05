@@ -38,6 +38,7 @@ export class AppComponent implements OnInit {
 
   onClearPosts() {
     // Send Http request
+    this.deletePosts();
   }
 
   private fetchPosts(){
@@ -47,8 +48,21 @@ export class AppComponent implements OnInit {
      (posts)=>{
        this.isFetching=false;
        this.loadedPosts=posts;
+     },
+     (error)=>{
+       console.log(error.message)
      }
  
     );
+  }
+
+  private deletePosts(){
+    this.postService.deletePosts()
+    .subscribe(
+      ()=>{
+        this.loadedPosts=[];
+        this.isFetching=false;
+      }
+    )
   }
 }
