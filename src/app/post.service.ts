@@ -1,7 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Post } from './post.model';
 import {map} from 'rxjs/operators'
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class PostService {
               append('header-2','nakhwa');
   
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient,private authService:AuthService) {
 
    }
 
@@ -34,7 +35,7 @@ export class PostService {
  
     let url=this.baseUrl+"posts.json"
     return  this.http.get<{[key:string]:Post}>(url,{
-      // headers:new HttpHeaders({"Custom-Header":'Zartab'})
+      params:new HttpParams().set('auth',this.authService.token),
       headers:this.headers
     }).
      pipe(
